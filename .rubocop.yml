@@ -1,0 +1,48 @@
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  NewCops: enable
+  SuggestExtensions: false
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/*
+    - config/initializers/simple_form_bootstrap.rb
+    - lib/tasks/auto_annotate_models.rake
+    - db/schema.rb
+
+Layout/LineLength:
+  Exclude:
+    - config/initializers/simple_form_bootstrap.rb
+    - config/initializers/simple_form.rb
+
+Style/Documentation:
+  Exclude:
+    - app/helpers/**/*
+    - app/controllers/**/*
+    - app/mailers/**/*
+    - app/models/**/*
+    - app/lib/**/*
+    - app/jobs/**/*
+    - db/migrate/**/*
+    - config/application.rb
+    - config/initializers/**/*
+    - test/**/*
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - db/schema.rb
+
+Style/StringLiterals:
+  Exclude:
+    - db/schema.rb
+
+Style/NumericLiterals:
+  Exclude:
+    - db/schema.rb
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - app/models/repository/check.rb
+    - test/models/repository_check_test.rb

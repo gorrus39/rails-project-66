@@ -1,0 +1,11 @@
+/ = simple_form_for @repository do |f|
+/   = f.input :full_name, as: :select, collection: rep_names, required: true
+/   = f.button :submit, class: 'btn btn btn-success'
+
+/ = form_tag url: repositories_path, method: :post do
+/   = select_tag :repository_git_id, collection: @collection
+/   = submit_tag
+
+= simple_form_for :repository, url: repositories_path, method: :post do |f|
+  = f.input :github_id, as: :select, collection: @repositories
+  = f.button :submit, class: 'btn btn btn-success'

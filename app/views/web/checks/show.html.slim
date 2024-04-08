@@ -1,0 +1,44 @@
+.mt-4.mb-5.pb-5
+  .container
+    .p-4.align-items-center.border.shadow.bg-white.rounded-3
+      .mb-4
+      = link_to t('.to_repository'), @check.repository,
+        class: 'btn btn-primary mb-4'
+      h1 = t('.check_number', number: @check.id + 1)
+      table.table
+        tbody
+          tr
+            td = t('.created_at')
+            td = l(@check.created_at, format: :full)
+          tr
+            td = t('.status.title')
+            td = t(".status.aasm_state.#{@check.aasm_state}")
+          tr
+            td = t('.result.title')
+            td = t(".result.aasm_state.#{@check.aasm_state}")
+          tr
+            td = t('.offense_count')
+            td = @check.details['offense_count']
+          tr
+            td = t('.commit_id')
+            td
+              - if @check.commit_id
+                = link_to @check.commit_id.slice(..6),
+                  github_commit_link(@check)
+      table.table.table-hover.mb-5
+        thead
+          tr
+            th = t('.table.message')
+            th = t('.table.rule')
+            th = t('.table.location')
+        tbody
+          - @check.details['files']&.each do |file|
+            tr
+              td colspan='3'
+                = link_to file['file_path'],
+                  github_file_path(file['file_path'], @check)
+            - file['offenses'].each do |offense|
+              tr
+                td = offense['message']
+                td = offense['rule']
+                td = offense['position']
