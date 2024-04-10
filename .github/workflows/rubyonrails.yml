@@ -54,3 +54,5 @@ jobs:
         run: bin/rails lint:rubocop
       - name: slim
         run: bin/rails lint:slim
+      - name: local tests
+        run: bin/rails test
