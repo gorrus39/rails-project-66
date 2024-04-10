@@ -79,6 +79,5 @@ gem 'rubocop', '~> 1.62'
 gem 'rubocop-rails', '2.24'
 gem 'sentry-rails', '~> 5.17'
 gem 'sentry-ruby', '~> 5.17'
-
 gem 'slim_lint', '~> 0.27.0'
 gem 'slim-rails', '~> 3.6'
