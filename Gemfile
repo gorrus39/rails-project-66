@@ -83,3 +83,6 @@ gem 'slim_lint', '~> 0.27.0'
 gem 'slim-rails', '~> 3.6'
 
 gem "pg", "~> 1.5"
+
+gem "rails-i18n", "~> 7.0"
+gem "i18n-debug", "~> 1.2"

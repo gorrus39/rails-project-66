@@ -1,0 +1,10 @@
+.mt-4.mb-5.pb-5
+  .container
+    .p-4.align-items-center.border.shadow.bg-white.rounded-3
+      .mb-4
+      .display-4.fw-bold.mb-0 = t('.greet')
+      p.mb-4 = t('.cources')
+      h2.fw-bold = t('.analizator')
+      p = t('.description')
+      = link_to t('.learn_more'), root_path,
+        class: 'btn btn-primary btn-lg px-4 mt-3 fw-bold'
