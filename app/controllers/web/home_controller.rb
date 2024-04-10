@@ -1,4 +1,7 @@
-class Web::HomeController < ApplicationController
-  def index
+# frozen_string_literal: true
+
+module Web
+  class HomeController < ApplicationController
+    def index; end
   end
 end
