@@ -4,6 +4,8 @@ ru:
       nav:
         main: Главная
         sign_in: Войти с помощью GitHub
+        log_out: Выйти
+        repositories: Репозитории
   web:
     home:
       index:

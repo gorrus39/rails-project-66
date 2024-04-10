@@ -84,5 +84,12 @@ gem 'slim-rails', '~> 3.6'
 
 gem 'pg', '~> 1.5'
 
-gem 'i18n-debug', '~> 1.2'
+# gem 'i18n-debug', '~> 1.2'
 gem 'rails-i18n', '~> 7.0'
+
+gem 'octokit', '~> 8.1'
+gem 'omniauth', '~> 2.1'
+gem 'omniauth-github', '~> 2.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
+gem 'faraday-retry', '~> 2.2' # почему-то warning без этого гема был
