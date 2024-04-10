@@ -1,0 +1,18 @@
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  NewCops: enable
+  SuggestExtensions: false
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/*
+
+Stule/Documentation:
+  Exclude:
+    - app/helpers/*
+    - app/mailers/*
+    - app/models/*
+    - config/application.rb
+    - test/*
