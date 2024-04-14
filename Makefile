@@ -1,11 +1,13 @@
 # local install
-prepare: install_gems make_env_file
+install: install_gems make_env_file prepare_db prepare_assets
 
 
 
+prepare_assets:
+	bin/rails assets:precompile
 
-
-
+prepare_db:
+	bin/rails db:create db:migrate
 
 install_gems:
 	bundle install

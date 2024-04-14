@@ -98,4 +98,7 @@ gem 'slim_lint', '~> 0.27.0'
 gem 'slim-rails', '~> 3.6'
 
 gem 'actionpack-action_caching'
-# gem 'actionpack-page_caching'
+gem 'dry-container'
+gem 'open3', '~> 0.1.0'
+
+gem 'aasm'

@@ -21,6 +21,7 @@ module Web
       repository = current_user.repositories.new(repository_params(rep_hash))
 
       if repository.save
+        CheckingRepositoryJob.perform_later(repository, @github_client)
         flash[:notice] = t('.notice')
       else
         flash[:alert] = t('.alert')
@@ -31,7 +32,8 @@ module Web
     private
 
     def set_github_client
-      @github_client = GithubClient.new(current_user.token)
+      github_client_class = AppContainer.resolve(:github_client)
+      @github_client = github_client_class.new(current_user.token)
     end
 
     def rep_hash

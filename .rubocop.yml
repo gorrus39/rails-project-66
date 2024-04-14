@@ -18,4 +18,5 @@ Stule/Documentation:
     - app/lib/**/*
     - db/migrate/**/*
     - config/application.rb
+    - config/initializers/**/*
     - test/**/*
