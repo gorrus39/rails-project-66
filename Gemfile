@@ -69,27 +69,33 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'webmock'
 end
 
+#
+# manually added
+#
 gem 'annotate', '~> 3.2'
 gem 'colorize', '~> 1.1'
 gem 'dotenv-rails', '~> 3.1'
+gem 'enumerize', '~> 2.8'
 gem 'faker', '~> 3.3'
-gem 'rubocop', '~> 1.62'
-gem 'rubocop-rails', '2.24'
-gem 'sentry-rails', '~> 5.17'
-gem 'sentry-ruby', '~> 5.17'
-gem 'slim_lint', '~> 0.27.0'
-gem 'slim-rails', '~> 3.6'
-
-gem 'pg', '~> 1.5'
-
+gem 'faraday-retry', '~> 2.2' # почему-то происходит warning без этого гема, например при rails db:migrate
 # gem 'i18n-debug', '~> 1.2'
-gem 'rails-i18n', '~> 7.0'
-
+gem 'minitest-power_assert', '~> 0.3.1'
 gem 'octokit', '~> 8.1'
 gem 'omniauth', '~> 2.1'
 gem 'omniauth-github', '~> 2.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'pg', '~> 1.5'
+gem 'rails-i18n', '~> 7.0'
+gem 'rubocop', '~> 1.62'
+gem 'rubocop-rails', '2.24'
+gem 'sentry-rails', '~> 5.17'
+gem 'sentry-ruby', '~> 5.17'
+gem 'simple_form'
+gem 'slim_lint', '~> 0.27.0'
+gem 'slim-rails', '~> 3.6'
 
-gem 'faraday-retry', '~> 2.2' # почему-то warning без этого гема был
+gem 'actionpack-action_caching'
+# gem 'actionpack-page_caching'

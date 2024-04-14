@@ -15,5 +15,7 @@ Stule/Documentation:
     - app/controllers/**/*
     - app/mailers/**/*
     - app/models/**/*
+    - app/lib/**/*
+    - db/migrate/**/*
     - config/application.rb
     - test/**/*

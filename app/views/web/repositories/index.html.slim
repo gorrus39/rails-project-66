@@ -1,0 +1,17 @@
+.mt-4.mb-5.pb-5
+  .container
+    .p-4.align-items-center.border.shadow.bg-white.rounded-3
+      .mb-4
+      = link_to t('.add'), new_repository_path, class: 'btn btn-primary'
+      table.table.table-striped.table-hover.mt-4
+        thead
+          tr
+            th scope="col" = t('.name')
+            th scope="col" = t('.language')
+            th scope="col" = t('.last_status')
+        tbody
+          - @repositories.each do |repository|
+            tr
+              th = repository.name
+              th = repository.language
+              th = 'repository.last_status'
