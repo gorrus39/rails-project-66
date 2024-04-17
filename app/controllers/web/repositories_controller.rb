@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
+require Rails.root.join('app/lib/github_client').to_s
+
 module Web
   class RepositoriesController < Web::ApplicationController
-    require Rails.root.join('app/lib/github_client').to_s
-
     before_action :autorize_user!
     before_action :set_github_client
     caches_action :new, expires_in: 5.minutes
