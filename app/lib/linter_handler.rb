@@ -12,6 +12,7 @@ class LinterHandler
       result_rubocop = JSON.parse(`bundle exec rubocop --format json -c #{rubocop_config_file} #{dir_path}/**/*.rb`)
 
       format_after_rubocop(result_rubocop)
+
     elsif @language.javascript?
       output_file_path = "#{dir_path}/eslint_result.json"
       `yarn eslint --no-config-lookup --format json --output-file #{output_file_path} #{dir_path}/**/*.js`
