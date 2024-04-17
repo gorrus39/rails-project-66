@@ -9,7 +9,7 @@ class LinterHandler
   def exec(dir_path)
     if @language.ruby?
       rubocop_config_file = Rails.root.join('.rubocop.yml').to_s
-      result_rubocop = JSON.parse(`bundle exec rubocop --format json --config #{rubocop_config_file} #{dir_path}/**/*.rb`)
+      result_rubocop = JSON.parse(`cd #{Rails.root} && bundle exec rubocop --format json --config #{rubocop_config_file} #{dir_path}/**/*.rb`)
 
       format_after_rubocop(result_rubocop)
     elsif @language.javascript?
