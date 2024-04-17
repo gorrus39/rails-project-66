@@ -8,6 +8,7 @@ module Api
     def from_webhook
       repository = Repository.find_by(full_name: request[:repository][:full_name])
       repsitory_check = repository.checks.create
+
       CheckingRepositoryJob.perform_later(repository, repository.user, repsitory_check)
       head :ok
     end
