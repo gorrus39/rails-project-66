@@ -18,6 +18,15 @@ class GithubClient
     @client.commits(rep_full_name).first.sha
   end
 
+  def mount_webhook(repository)
+    @client.create_hook(
+      repository.full_name,
+      'web',
+      { url: 'https://665d-77-91-84-2.ngrok-free.app/api/checks', content_type: 'json' },
+      { events: %w[push], active: true }
+    )
+  end
+
   private
 
   def repos_with_valid_lang(repos, user)
