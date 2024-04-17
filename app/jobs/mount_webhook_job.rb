@@ -8,6 +8,8 @@ class MountWebhookJob < ApplicationJob
   def perform(repository, user)
     github_client = github_client_by(user)
     github_client.mount_webhook(repository)
+  rescue StandardError
+    'already exist'
   end
 
   private
