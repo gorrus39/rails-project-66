@@ -8,9 +8,7 @@ class LinterHandler
 
   def exec(dir_path)
     if @language.ruby?
-      # rubocop_config_file = Rails.root.join('.rubocop.yml')
-      rubocop_config_file = '/home/g/Desktop/projects/rails-project-66/.rubocop.yml'
-      result_rubocop = JSON.parse(`cd #{Rails.root} && bundle exec rubocop --format json --config #{rubocop_config_file} #{dir_path}/**/*.rb`)
+      result_rubocop = rubocop_exec(dir_path)
       format_after_rubocop(result_rubocop)
     elsif @language.javascript?
       output_file_path = "#{dir_path}/eslint_result.json"
@@ -21,6 +19,21 @@ class LinterHandler
   end
 
   private
+
+  def rubocop_exec(dir_path)
+    rubocop_config_file = Rails.root.join('.rubocop.yml')
+    # JSON.parse(`cd #{Rails.root} && \
+    #                           bundle exec rubocop \
+    #                           --format json \
+    #                           --config #{rubocop_config_file} \
+    #                           #{dir_path}/**/*.rb`)
+
+    command = "cd #{Rails.root} && bundle exec rubocop --format json --config #{rubocop_config_file} #{dir_path}/**/*.rb"
+    Rails.logger.debug { "Executing command: #{command}" }
+    result_rubocop = JSON.parse(`#{command}`)
+    Rails.logger.debug { "RuboCop result: #{result_rubocop.inspect}" }
+    result_rubocop
+  end
 
   def format_after_rubocop(json)
     files = json['files'].map do |file|
