@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Web
-  class RepositoriesController < ApplicationController
+  class RepositoriesController < Web::ApplicationController
     require Rails.root.join('app/lib/github_client').to_s
 
     before_action :autorize_user!
@@ -9,7 +9,19 @@ module Web
     caches_action :new, expires_in: 5.minutes
 
     def index
-      @repositories = current_user.repositories
+      @repositories = current_user.repositories.includes(:checks).order(created_at: :desc)
+    end
+
+    def show
+      @repository = Repository.find(params[:id])
+      @checks = @repository.checks.order(created_at: :desc)
+    end
+
+    def checks
+      repository = Repository.find(params[:id])
+      repsitory_check = repository.checks.create
+      CheckingRepositoryJob.perform_later(repository, current_user, repsitory_check)
+      redirect_to repository
     end
 
     def new
@@ -18,10 +30,10 @@ module Web
     end
 
     def create
-      repository = current_user.repositories.new(repository_params(rep_hash))
-
+      repository = repository_instance
       if repository.save
-        CheckingRepositoryJob.perform_later(repository, @github_client)
+        repsitory_check = repository.checks.create
+        CheckingRepositoryJob.perform_later(repository, current_user, repsitory_check)
         flash[:notice] = t('.notice')
       else
         flash[:alert] = t('.alert')
@@ -30,6 +42,10 @@ module Web
     end
 
     private
+
+    def repository_instance
+      current_user.repositories.new(repository_params(rep_hash))
+    end
 
     def set_github_client
       github_client_class = AppContainer.resolve(:github_client)

@@ -16,6 +16,7 @@ Stule/Documentation:
     - app/mailers/**/*
     - app/models/**/*
     - app/lib/**/*
+    - app/jobs/**/*
     - db/migrate/**/*
     - config/application.rb
     - config/initializers/**/*

@@ -5,9 +5,8 @@
 # Table name: repository_checks
 #
 #  id            :integer          not null, primary key
-#  aasm_state    :string
-#  details       :text
-#  status        :string           default("request"), not null
+#  aasm_state    :string           default("request"), not null
+#  details       :json
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  commit_id     :string
@@ -23,7 +22,7 @@
 #
 class RepositoryCheck < ApplicationRecord
   include AASM
-  belongs_to :repository
+  belongs_to :repository, class_name: 'Repository'
 
   aasm do
     state :request, initial: true

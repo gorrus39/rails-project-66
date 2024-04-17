@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.1].define(version: 2024_04_14_111159) do
   create_table "repositories", force: :cascade do |t|
     t.string "name"
-    t.string "github_id"
+    t.string "github_id", null: false
     t.string "full_name"
     t.string "language"
     t.string "clone_url"
@@ -21,15 +21,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_111159) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["github_id"], name: "index_repositories_on_github_id", unique: true
     t.index ["user_id"], name: "index_repositories_on_user_id"
   end
 
   create_table "repository_checks", force: :cascade do |t|
     t.string "commit_id"
     t.integer "repository_id", null: false
-    t.string "aasm_state"
-    t.string "status", default: "request", null: false
-    t.text "details"
+    t.string "aasm_state", default: "request", null: false
+    t.json "details", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["repository_id"], name: "index_repository_checks_on_repository_id"

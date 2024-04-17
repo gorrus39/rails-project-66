@@ -12,12 +12,13 @@
 #  ssh_url    :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  github_id  :string
+#  github_id  :string           not null
 #  user_id    :integer          not null
 #
 # Indexes
 #
-#  index_repositories_on_user_id  (user_id)
+#  index_repositories_on_github_id  (github_id) UNIQUE
+#  index_repositories_on_user_id    (user_id)
 #
 # Foreign Keys
 #
@@ -28,5 +29,7 @@ class Repository < ApplicationRecord
   belongs_to :user
   has_many :checks, class_name: 'RepositoryCheck', dependent: :destroy
 
-  enumerize :language, in: [:ruby]
+  enumerize :language, in: %i[ruby javascript]
+
+  validates :github_id, uniqueness: true
 end
