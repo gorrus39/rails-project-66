@@ -10,6 +10,7 @@ class LinterHandler
     if @language.ruby?
       rubocop_config_file = Rails.root.join('.rubocop.yml')
       result_rubocop = JSON.parse(`bundle exec rubocop --format json -c #{rubocop_config_file} #{dir_path}/**/*.rb`)
+
       format_after_rubocop(result_rubocop)
     elsif @language.javascript?
       output_file_path = "#{dir_path}/eslint_result.json"
