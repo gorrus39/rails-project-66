@@ -26,7 +26,7 @@ class LinterHandler
       offenses = map_rubocop_offenses(file['offenses'])
       { file_path: make_file_path_from_rubocop(file['path']), offenses: }
     end
-    files.filter! { |file| file.offenses.positive? }
+    files.filter! { |file| file[:offenses].positive? }
     { files:, offense_count: json['summary']['offense_count'] }
   end
 
