@@ -18,7 +18,7 @@
             td = t(".result.aasm_state.#{@check.aasm_state}")
           tr
             td = t('.offense_count')
-            td = @check.details["offense_count"]
+            td = @check.details['offense_count']
           tr
             td = t('.commit_id')
             td
@@ -32,7 +32,7 @@
             th = t('.table.rule')
             th = t('.table.location')
         tbody
-          - @check.details["files"].each do |file|
+          - @check.details['files'].each do |file|
             tr
               td colspan='3'
                 = link_to file['file_path'],

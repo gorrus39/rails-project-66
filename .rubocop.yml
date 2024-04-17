@@ -16,7 +16,7 @@ Layout/LineLength:
     - config/initializers/simple_form_bootstrap.rb
     - config/initializers/simple_form.rb
 
-Stule/Documentation:
+Style/Documentation:
   Exclude:
     - app/helpers/**/*
     - app/controllers/**/*
