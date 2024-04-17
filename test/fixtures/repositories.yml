@@ -34,7 +34,7 @@ one:
 
 two:
   name: MyString
-  github_id: MyString
+  github_id: MyString2
   full_name: MyString
   language: MyString
   clone_url: MyString
