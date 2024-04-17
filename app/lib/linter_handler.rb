@@ -31,6 +31,7 @@ class LinterHandler
     command = "cd #{Rails.root} && bundle exec rubocop --format json --config #{rubocop_config_file} #{dir_path}/**/*.rb"
     Rails.logger.debug { "Executing command: #{command}" }
     result_rubocop = JSON.parse(`#{command}`)
+
     Rails.logger.debug { "RuboCop result: #{result_rubocop.inspect}" }
     result_rubocop
   end
