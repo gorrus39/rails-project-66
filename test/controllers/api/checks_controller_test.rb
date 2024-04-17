@@ -1,8 +1,12 @@
-require "test_helper"
+# frozen_string_literal: true
 
-class Api::ChecksControllerTest < ActionDispatch::IntegrationTest
-  test "should get from_webhook" do
-    get api_checks_from_webhook_url
-    assert_response :success
+require 'test_helper'
+
+module Api
+  class ChecksControllerTest < ActionDispatch::IntegrationTest
+    test 'should get from_webhook' do
+      get api_checks_from_webhook_url
+      assert_response :success
+    end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: repository_checks
@@ -19,10 +21,12 @@
 #
 #  repository_id  (repository_id => repositories.id)
 #
-require "test_helper"
+require 'test_helper'
 
-class Repository::CheckTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+module Repository
+  class CheckTest < ActiveSupport::TestCase
+    # test "the truth" do
+    #   assert true
+    # end
+  end
 end

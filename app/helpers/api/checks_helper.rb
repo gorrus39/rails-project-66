@@ -1,2 +1,6 @@
-module Api::ChecksHelper
+# frozen_string_literal: true
+
+module Api
+  module ChecksHelper
+  end
 end
