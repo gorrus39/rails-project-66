@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post :checks, on: :member
       resources :checks, only: %i[show]
     end
+    get '/repositories/:repository_id/checks/:id', as: :repository_checks, to: 'checks#show'
 
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
     post 'auth/log_out', to: 'auth#log_out', as: :auth_log_out
