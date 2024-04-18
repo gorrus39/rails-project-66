@@ -3,7 +3,7 @@
 module Web
   class ChecksController < Web::ApplicationController
     def show
-      @check = RepositoryCheck.includes(:repository).find(params[:id])
+      @check = Repository::Check.includes(:repository).find(params[:id])
     end
   end
 end
