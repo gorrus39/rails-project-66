@@ -5,8 +5,9 @@
 # Table name: repository_checks
 #
 #  id            :integer          not null, primary key
-#  aasm_state    :string           default("request"), not null
 #  details       :json
+#  passed        :boolean          default(FALSE), not null
+#  state         :string           default("request"), not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  commit_id     :string
@@ -20,11 +21,11 @@
 #
 #  repository_id  (repository_id => repositories.id)
 #
-class RepositoryCheck < ApplicationRecord
+class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModuleChildren
   include AASM
-  belongs_to :repository, class_name: 'Repository'
+  belongs_to :repository
 
-  aasm do
+  aasm column: :state do
     state :request, initial: true
     state :success, :fail
 

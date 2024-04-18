@@ -31,10 +31,10 @@
             tr
               td = link_to((check.id + 1),
                 repository_check_path(@repository, check))
-              td = t(".table.aasm_state.status.#{check.aasm_state}")
+              td = t(".table.state.status.#{check.state}")
               td
                 - if check.commit_id
                   = link_to check.commit_id.slice(..6),
                     github_commit_link(check)
-              td = t(".table.aasm_state.result.#{check.aasm_state}")
+              td = t(".table.state.result.#{check.state}")
               td = l(check.created_at, format: :short)

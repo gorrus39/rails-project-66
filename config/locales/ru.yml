@@ -36,7 +36,7 @@ ru:
           commit_id: ID коммита
           check_success?: Проверка пройдена?
           created_at: Дата создания
-          aasm_state:
+          state:
             status:
               request: В процессе
               fail: Завершена
@@ -52,13 +52,13 @@ ru:
         created_at: Дата создания
         status: 
           title: Статус
-          aasm_state:
+          state:
             request: Проверка ещё не завершена
             fail: Завершена
             success: Завершена
         result: 
           title: Проверка пройдена
-          aasm_state:
+          state:
             request: ''
             fail: 'false'
             success: 'true'

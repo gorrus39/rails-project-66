@@ -11,7 +11,7 @@
             th scope="col" = t('.last_status')
         tbody
           - @repositories.each do |repository|
-            - state = repository.checks.last&.aasm_state
+            - state = repository.checks.last&.state
             tr
               td = link_to repository.name, repository
               td = repository.language
