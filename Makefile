@@ -13,7 +13,7 @@ prepare_db:
 	bin/rails db:create db:migrate
 
 prepare_db_for_render:
-	bin/rails db:migrate
+	bin/rails db:migrate RAILS_ENV=production
 
 install_gems:
 	bundle install
