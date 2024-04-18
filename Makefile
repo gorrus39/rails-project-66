@@ -1,7 +1,10 @@
-# local install
-install: install_gems make_env_file prepare_db prepare_assets
+# local install for development mode
+install: install_gems make_env_file make_dev_cache_file prepare_db prepare_assets
 
 
+
+make_dev_cache_file:
+	rails dev:cache
 
 prepare_assets:
 	bin/rails assets:precompile

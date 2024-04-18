@@ -29,7 +29,7 @@ class RepositoryCheck < ApplicationRecord
     state :success, :fail
 
     event :to_success do
-      transitions from: :request, to: :fail
+      transitions from: :request, to: :success
     end
 
     event :to_fail do

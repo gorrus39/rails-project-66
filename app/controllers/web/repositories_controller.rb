@@ -33,8 +33,8 @@ module Web
       repository = repository_instance
       if repository.save
         repsitory_check = repository.checks.create
-        # MountWebhookJob.perform_later(repository, current_user)
-        CheckingRepositoryJob.perform_now(repository, current_user, repsitory_check)
+        MountWebhookJob.perform_later(repository, current_user)
+        CheckingRepositoryJob.perform_later(repository, current_user, repsitory_check)
         flash[:notice] = t('.notice')
       else
         flash[:alert] = t('.alert')

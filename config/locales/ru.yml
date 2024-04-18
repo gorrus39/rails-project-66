@@ -38,7 +38,7 @@ ru:
           created_at: Дата создания
           aasm_state:
             status:
-              request: Проверка ещё не завершена
+              request: В процессе
               fail: Завершена
               success: Завершена
             result:
@@ -55,13 +55,13 @@ ru:
           aasm_state:
             request: Проверка ещё не завершена
             fail: Завершена
-            sucess: Завершена
+            success: Завершена
         result: 
           title: Проверка пройдена
           aasm_state:
             request: ''
             fail: 'false'
-            sucess: 'true'
+            success: 'true'
         offense_count: Количество замечаний
         commit_id: ID коммита
         table:

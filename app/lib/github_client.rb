@@ -22,7 +22,7 @@ class GithubClient
     @client.create_hook(
       repository.full_name,
       'web',
-      { url: "#{ENV.fetch('NGROK_BASE_URL', nil)}/api/checks", content_type: 'json' },
+      { url: "#{ENV.fetch('BASE_URL', nil)}/api/checks", content_type: 'json' },
       { events: %w[push], active: true }
     )
   end

@@ -21,11 +21,9 @@ class LinterHandler
   private
 
   def rubocop_exec(dir_path)
-    rubocop_config_file = Rails.root.join('.rubocop.yml')
     JSON.parse(`cd #{Rails.root} && \
                               bundle exec rubocop \
                               --format json \
-                              --config #{rubocop_config_file} \
                               #{dir_path}/**/*.rb`)
   end
 

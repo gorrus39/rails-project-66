@@ -27,11 +27,9 @@ class CheckingRepositoryJob < ApplicationJob
 
     linter = LinterHandler.new(repository)
 
-    linter.exec(dir_path)
-    # FileUtils.rm_rf(dir_path)
-    # result_json = linter.exec(dir_path)
-    # FileUtils.rm_rf(dir_path)
-    # result_json
+    result_json = linter.exec(dir_path)
+    FileUtils.rm_rf(dir_path)
+    result_json
   end
 
   def github_client_by(user)
