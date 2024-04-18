@@ -2,6 +2,8 @@
 
 module Web
   class HomeController < Web::ApplicationController
-    def index; end
+    def index
+      # UserMailer.with(subject: '@user').welcome_email.deliver_now
+    end
   end
 end

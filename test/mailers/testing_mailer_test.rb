@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class MountWebhookJobTest < ActiveJob::TestCase
+class TestingMailerTest < ActionMailer::TestCase
   # test "the truth" do
   #   assert true
   # end
