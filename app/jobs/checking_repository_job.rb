@@ -11,6 +11,7 @@ class CheckingRepositoryJob < ApplicationJob
     if (linter_result_json[:offense_count]).positive?
       repsitory_check.to_fail!
       repsitory_check.update(details: linter_result_json)
+      NotifyMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later
     else
       repsitory_check.to_success!
     end
