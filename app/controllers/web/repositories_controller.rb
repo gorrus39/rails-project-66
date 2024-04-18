@@ -32,9 +32,7 @@ module Web
     def create
       repository = repository_instance
       if repository.save
-        repsitory_check = repository.checks.create
-        MountWebhookJob.perform_later(repository, current_user)
-        CheckingRepositoryJob.perform_later(repository, current_user, repsitory_check)
+        exec_actions_with(repository)
         flash[:notice] = t('.notice')
       else
         flash[:alert] = t('.alert')
@@ -43,6 +41,12 @@ module Web
     end
 
     private
+
+    def exec_actions_with(repository)
+      repsitory_check = repository.checks.create
+      MountWebhookJob.perform_later(repository, current_user) if ENV['BASE_URL'].present?
+      CheckingRepositoryJob.perform_later(repository, current_user, repsitory_check)
+    end
 
     def repository_instance
       current_user.repositories.new(repository_params(rep_hash))

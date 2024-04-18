@@ -9,7 +9,7 @@ class MountWebhookJob < ApplicationJob
     github_client = github_client_by(user)
     github_client.mount_webhook(repository)
   rescue StandardError
-    'already exist'
+    'webhook already exist'
   end
 
   private
