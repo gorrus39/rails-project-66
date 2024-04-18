@@ -3,9 +3,9 @@
 # Table name: repository_checks
 #
 #  id            :integer          not null, primary key
+#  aasm_state    :string           default("request"), not null
 #  details       :json
 #  passed        :boolean          default(FALSE), not null
-#  state         :string           default("request"), not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  commit_id     :string

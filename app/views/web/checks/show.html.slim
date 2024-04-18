@@ -12,10 +12,10 @@
             td = l(@check.created_at, format: :full)
           tr
             td = t('.status.title')
-            td = t(".status.state.#{@check.state}")
+            td = t(".status.aasm_state.#{@check.aasm_state}")
           tr
             td = t('.result.title')
-            td = t(".result.state.#{@check.state}")
+            td = t(".result.aasm_state.#{@check.aasm_state}")
           tr
             td = t('.offense_count')
             td = @check.details['offense_count']
