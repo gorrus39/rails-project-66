@@ -75,6 +75,7 @@ end
 #
 # manually added
 #
+gem 'aasm'
 gem 'actionpack-action_caching'
 gem 'annotate', '~> 3.2'
 gem 'colorize', '~> 1.1'
@@ -98,5 +99,4 @@ gem 'sentry-ruby', '~> 5.17'
 gem 'simple_form'
 gem 'slim_lint', '~> 0.27.0'
 gem 'slim-rails', '~> 3.6'
-
-gem 'aasm'
+gem 'stackprof'

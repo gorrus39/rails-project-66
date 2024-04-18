@@ -1,37 +1,36 @@
 [![Actions Status](https://github.com/tovarish39/rails-project-66/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/tovarish39/rails-project-66/actions)
 ![local tests and linter](https://github.com/tovarish39/rails-project-66/actions/workflows/rubyonrails.yml/badge.svg)
 
-# Проект "Анализатор качества репозиториев"
-Проект отображает результат работы линтеров для своих публичных репозиториев. Возможные репозитории для анализа - репозитории, у которых github определил основной язык  - ruby или javascript. Для просмотра результата репозитория необходимо залогинниться через github и выбрать из списка желаемый для анализа свой репозиторий. Так же при добавлении репозитория, для отслеживания качество его кода, устанавливается вебхук, для автоматической проверки репозитория, при добавлении нового коммита на "push" event. 
+# Project "Repository Quality Analyzer"
+The project displays the output of linters for its public repositories. Possible repositories for analysis are repositories for which github has determined the main language - ruby ​​or javascript. To view the result of the repository, you need to log in via github and select your repository from the list that you want to analyze. Also, when adding a repository, to monitor the quality of its code, a webhook is installed to automatically check the repository when adding a new commit to a “push” event.
 
-## Проект работает по [ссылке](https://rails-project-66-p2vh.onrender.com/)
-## Проект-образец работает по [ссылке](https://rails-github-quality-ru.hexlet.app)
+## The project works on the  [ссылке](https://rails-project-66-p2vh.onrender.com/)
+## The sample project works at the [ссылке](https://rails-github-quality-ru.hexlet.app)
 
-
-## Технические условия и требования к проекту
-- ruby -v => 3.2.2
+## Technical specifications and requirements for the project
+- ruby ​​-v => 3.2.2
 - rails -v => 7.1.3
-- ngrok для development окружения, чтоб работали хуки 
-- CI - git actions - тестирование, линтеры rubocop, slim.
+- ngrok for development environment so that hooks work
+- CI - git actions - testing, linters rubocop, slim.
 - CD - Render(auto-deploy)
-- использование шаблонизатора slim 
-- аутентификация через github
+- use of the slim template engine
+- authentication via github
 - bootstrap
-- все текстовые выводы выполнены через технологию i18n
-- postgres для production среды
+- all text outputs are made via i18n technology
+- postgres for production environment
 
-# запуск проекта в режиме development
+# launching the project in development mode
     make install
 
-заполнить в файле .env
+fill in the .env file
+
 - GITHUB_CLIENT_ID=
 - GITHUB_CLIENT_SECRET=
 
-
-  (опционально)
-  для установки вебхуков на репозитории
-  необходимо запустить ngrok http 3000
-  заполнить в файле .env результат публичного адреса работы ngrok
+  (optional)
+  to install webhooks on the repository
+  you need to run ngrok http 3000
+  fill in the .env file with the result of the public address of ngrok's work
 - BASE_URL=
 
 

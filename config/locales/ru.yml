@@ -68,3 +68,7 @@ ru:
           message: Сообщение
           rule: Идентификатор правила
           location: Строка и символ
+  helpers:
+    submit:
+      repository:
+        submit: Создать Repository
