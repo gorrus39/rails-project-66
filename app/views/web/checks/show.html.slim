@@ -32,7 +32,7 @@
             th = t('.table.rule')
             th = t('.table.location')
         tbody
-          - @check.details['files'].each do |file|
+          - @check.details['files']&.each do |file|
             tr
               td colspan='3'
                 = link_to file['file_path'],

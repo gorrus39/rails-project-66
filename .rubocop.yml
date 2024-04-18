@@ -10,6 +10,7 @@ Metrics/BlockLength:
     - config/environments/*
     - config/initializers/simple_form_bootstrap.rb
     - lib/tasks/auto_annotate_models.rake
+    - db/schema.rb
 
 Layout/LineLength:
   Exclude:
