@@ -26,9 +26,12 @@ class CheckingRepositoryJob < ApplicationJob
     clone_repository(repository, dir_path)
 
     linter = LinterHandler.new(repository)
-    result_json = linter.exec(dir_path)
-    FileUtils.rm_rf(dir_path)
-    result_json
+
+    linter.exec(dir_path)
+    # FileUtils.rm_rf(dir_path)
+    # result_json = linter.exec(dir_path)
+    # FileUtils.rm_rf(dir_path)
+    # result_json
   end
 
   def github_client_by(user)
