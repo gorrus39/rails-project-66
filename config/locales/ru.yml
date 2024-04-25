@@ -1,5 +1,7 @@
 ru:
   layouts:
+    application:
+      app_title: Github Quality
     shared:
       nav:
         main: Главная
