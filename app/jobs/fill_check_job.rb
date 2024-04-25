@@ -6,15 +6,16 @@ class FillCheckJob < ApplicationJob
   queue_as :default
 
   def perform(user, check)
+    check.request!
     linter_result_json = check_exec(user, check)
 
     if (linter_result_json[:offense_count]).positive?
-      check.to_fail!
+      check.fail!
       check.update(details: linter_result_json)
       NotifyMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later if Rails.env.development?
     else
       check.passed = true
-      check.to_finished!
+      check.finish!
     end
   end
 

@@ -47,8 +47,8 @@ module Web
 
     def exec_actions_with(repository)
       check = repository.checks.create
-      MountWebhookJob.perform_later(repository, current_user) if ENV['BASE_URL'].present?
       FillCheckJob.perform_later(current_user, check)
+      MountWebhookJob.perform_later(repository, current_user) if ENV['BASE_URL'].present?
     end
 
     def repository_instance(github_repo_id)

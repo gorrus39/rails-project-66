@@ -13,11 +13,15 @@ class LinterHandler
     elsif @language.javascript?
       output_file_path = "#{dir_path}/eslint_result.json"
       FileUtils.touch output_file_path
-      command = "cd #{Rails.root} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path} #{dir_path}/"
-      raise command
+      command = "cd #{Rails.root} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path} #{dir_path}"
       system command
-      sleep 1
+      # begin
       format_after_eslint(JSON.parse(File.read(output_file_path)))
+      # rescue StandardError => e
+      # почему-то после eslint,
+      # когда линтер падает,
+      # он в файл пишет резлультат в json и ещё выдаёт ошибку что он упал...
+      # end
     end
   end
 

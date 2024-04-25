@@ -24,8 +24,9 @@ ru:
         last_status: Статус последней проверки
         repository:
           checks:
-            request: Проверка ещё не завершена
-            fail: 'false'
+            created: Проверка ещё не завершена
+            requested: Проверка ещё не завершена
+            failed: 'false'
             finished: 'true'
       show:
         check: Проверить
@@ -40,12 +41,14 @@ ru:
           created_at: Дата создания
           aasm_state:
             status:
-              request: В процессе
-              fail: Завершена
+              created: Проверка ещё не завершена
+              requested: В процессе
+              failed: Завершена
               finished: Завершена
             result:
-              request: ''
-              fail: 'false'
+              created: Проверка ещё не завершена
+              requested: ''
+              failed: 'false'
               finished: 'true'
       create:
         alert: Необходимо выбрать репозиторий из списка
@@ -58,14 +61,16 @@ ru:
         status: 
           title: Статус
           aasm_state:
-            request: Проверка ещё не завершена
-            fail: Завершена
+            created: Проверка ещё не завершена
+            requested: Проверка ещё не завершена
+            failed: Завершена
             finished: Завершена
         result: 
           title: Проверка пройдена
           aasm_state:
-            request: ''
-            fail: 'false'
+            created: Проверка ещё не завершена
+            requested: ''
+            failed: 'false'
             finished: 'true'
         offense_count: Количество замечаний
         commit_id: ID коммита

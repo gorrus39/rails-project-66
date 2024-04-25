@@ -5,7 +5,7 @@
 # Table name: repository_checks
 #
 #  id            :integer          not null, primary key
-#  aasm_state    :string           default("request"), not null
+#  aasm_state    :string           default("created"), not null
 #  details       :json
 #  passed        :boolean          default(FALSE), not null
 #  created_at    :datetime         not null
@@ -27,18 +27,23 @@ class Repository::Check < ApplicationRecord
   belongs_to :repository
 
   aasm do
-    state :request, initial: true
-    state :finished, :fail, :passed
+    state :created, initial: true
+    state :requested
+    state :finished, :failed, :passed
 
-    event :to_finished do
-      transitions from: :request, to: :finished
+    event :request do
+      transitions from: :created, to: :requested
     end
 
-    event :to_fail do
-      transitions from: :request, to: :fail
+    event :finish do
+      transitions from: :requested, to: :finished
     end
-    event :to_passed do
-      transitions from: :request, to: :passed
+
+    event :fail do
+      transitions from: :requested, to: :failed
+    end
+    event :pass do
+      transitions from: :requested, to: :passed
     end
   end
 end
