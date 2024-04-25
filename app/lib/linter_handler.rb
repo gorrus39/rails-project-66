@@ -13,7 +13,9 @@ class LinterHandler
     elsif @language.javascript?
       output_file_path = "#{dir_path}/eslint_result.json"
       FileUtils.touch output_file_path
-      system "cd #{Rails.root} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path} #{dir_path}"
+      command = "cd #{Rails.root} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path} #{dir_path}/"
+      raise command
+      system command
       sleep 1
       format_after_eslint(JSON.parse(File.read(output_file_path)))
     end

@@ -11,7 +11,7 @@ class FillCheckJob < ApplicationJob
     if (linter_result_json[:offense_count]).positive?
       check.to_fail!
       check.update(details: linter_result_json)
-      NotifyMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later
+      NotifyMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later if Rails.env.development?
     else
       check.passed = true
       check.to_finished!

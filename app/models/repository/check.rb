@@ -23,6 +23,7 @@
 #
 class Repository::Check < ApplicationRecord
   include AASM
+
   belongs_to :repository
 
   aasm do
