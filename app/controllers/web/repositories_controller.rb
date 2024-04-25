@@ -23,17 +23,27 @@ module Web
     end
 
     def create
-      repository = repository_instance
+      github_repo_id = params['repository']['github_id']
+      if github_repo_id.present?
+        try_create_by(github_repo_id)
+        redirect_to repositories_path
+      else
+        flash[:alert] = t('.alert')
+        redirect_to new_repository_path
+      end
+    end
+
+    private
+
+    def try_create_by(github_repo_id)
+      repository = repository_instance(github_repo_id)
       if repository.save
         exec_actions_with(repository)
         flash[:notice] = t('.notice')
       else
         flash[:alert] = t('.alert')
       end
-      redirect_to repositories_path
     end
-
-    private
 
     def exec_actions_with(repository)
       check = repository.checks.create
@@ -41,8 +51,10 @@ module Web
       FillCheckJob.perform_later(current_user, check)
     end
 
-    def repository_instance
-      github_repo_id = params['repository']['github_id']
+    def repository_instance(github_repo_id)
+      repository = Repository.find_by(github_id: github_repo_id)
+      return repository if repository
+
       rep_params = @github_client.repository_params(github_repo_id)
       current_user.repositories.new(rep_params)
     end

@@ -47,6 +47,9 @@ ru:
               request: ''
               fail: 'false'
               finished: 'true'
+      create:
+        alert: Необходимо выбрать репозиторий из списка
+        notice: Проверка выполняется
     checks:
       show:
         to_repository: Перейти к репозиторию
