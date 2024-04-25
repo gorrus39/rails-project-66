@@ -7,8 +7,8 @@ module Api
     skip_before_action :verify_authenticity_token
     def from_webhook
       repository = Repository.find_by(full_name: params[:repository][:full_name])
-      check = repository.checks.create
-      FillCheckJob.perform_later(repository.user, check)
+      check = repository&.checks&.create
+      FillCheckJob.perform_later(repository.user, check) if check
       head :ok
     end
   end

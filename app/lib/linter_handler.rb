@@ -11,17 +11,33 @@ class LinterHandler
       result_rubocop = rubocop_exec(dir_path)
       format_after_rubocop(result_rubocop)
     elsif @language.javascript?
+      # output_file_path = "#{dir_path}/eslint_result.json"
+      # FileUtils.touch output_file_path
+      # result_eslint = eslint_exec(dir_path, output_file_path)
+      # format_after_eslint(result_eslint)
+
       output_file_path = "#{dir_path}/eslint_result.json"
       FileUtils.touch output_file_path
-      command = "cd #{Rails.root} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path} #{dir_path}/"
-      raise command
-      system command
+      system "cd #{dir_path} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path}"
       sleep 1
       format_after_eslint(JSON.parse(File.read(output_file_path)))
     end
   end
 
   private
+
+  def eslint_exec(dir_path, output_file_path)
+    `cd #{Rails.root} && yarn eslint --no-config-lookup --format json #{dir_path} 1> #{output_file_path}`
+
+    line_with_json = ''
+    File.foreach(output_file_path) do |line|
+      if line.strip.start_with?('[')
+        line_with_json = line
+        break
+      end
+    end
+    JSON.parse(line_with_json)
+  end
 
   def rubocop_exec(dir_path)
     JSON.parse(`cd #{Rails.root} && \
