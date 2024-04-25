@@ -26,6 +26,7 @@ class FillCheckJob < ApplicationJob
     check.commit_id = github_client.get_latest_commit_sha(repository.full_name)
 
     dir_path = Rails.root.join("tmp/clone_app/#{repository.id}")
+    FileUtils.rm_rf dir_path # если вруг была создана папка, при прошлой бд
     github_client.clone_repository(repository, dir_path)
 
     linter = LinterHandler.new(repository)

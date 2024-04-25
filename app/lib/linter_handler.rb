@@ -13,7 +13,7 @@ class LinterHandler
     elsif @language.javascript?
       output_file_path = "#{dir_path}/eslint_result.json"
       FileUtils.touch output_file_path
-      system "cd #{dir_path} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path}"
+      system "cd #{Rails.root} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path} #{dir_path}"
       sleep 1
       format_after_eslint(JSON.parse(File.read(output_file_path)))
     end
@@ -38,8 +38,8 @@ class LinterHandler
   end
 
   def make_file_path_from_rubocop(file_path)
-    format_file_path = file_path.split('/')[2..].join('/')
-    "https://github.com/#{@repository_full_name}/#{format_file_path}"
+    file_path.split('/')[3..].join('/')
+    # "https://github.com/#{@repository_full_name}/#{format_file_path}"
   end
 
   def make_file_path_from_eslint(absolute_file_path)
@@ -71,6 +71,7 @@ class LinterHandler
 
       { file_path: make_file_path_from_eslint(file['filePath']), offenses: }
     end
+    files.filter! { |file| file[:offenses].count.positive? }
     { files:, offense_count: }
   end
 end

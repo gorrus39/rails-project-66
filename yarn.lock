@@ -493,7 +493,7 @@ eslint-visitor-keys@^4.0.0:
 
 eslint@^9.1.1:
   version "9.1.1"
-  resolved "https://registry.npmjs.org/eslint/-/eslint-9.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-9.1.1.tgz#39ec657ccd12813cb4a1dab2f9229dcc6e468271"
   integrity sha512-b4cRQ0BeZcSEzPpY2PjFY70VbO32K7BStTGtBsnIGdTSEEQzBi8hPBcGQmTG2zUvFr9uLe0TK42bw8YszuHEqg==
   dependencies:
     "@eslint-community/eslint-utils" "^4.2.0"
