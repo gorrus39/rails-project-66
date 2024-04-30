@@ -46,6 +46,7 @@ Style/NumericLiterals:
 Style/ClassAndModuleChildren:
   Exclude:
     - app/models/repository/check.rb
+    - app/policies/repository/check.rb
     - test/models/repository_check_test.rb
 
 Metrics/AbcSize:

@@ -14,11 +14,13 @@ module Web
 
     def show
       @repository = Repository.find(params[:id])
+      authorize @repository
       @checks = @repository.checks.order(created_at: :desc).page params[:page]
     end
 
     def new
       @repository = current_user.repositories.build
+      authorize @repository
 
       cache_key = "#{current_user.cache_key_with_version}/github_repositories"
 
@@ -29,6 +31,7 @@ module Web
 
     def create
       repository = current_user.repositories.find_or_initialize_by(repository_params)
+      authorize repository
 
       if repository.save
         UpdateInfoRepositoryJob.perform_later(repository.id, current_user.id)

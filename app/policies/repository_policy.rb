@@ -1,10 +1,15 @@
 # frozen_string_literal: true
 
 class RepositoryPolicy < ApplicationPolicy
-  #   def update?
-  #     user.admin? or !record.published?
-  #   end
+  def show?
+    user == record.user
+  end
 
-  #   def new?
-  #   end
+  def new?
+    user == record.user
+  end
+
+  def create?
+    user == record.user
+  end
 end
