@@ -23,14 +23,12 @@ module Web
       email = data['info']['email']
       token = data['credentials']['token']
       nickname = data['info']['nickname']
+      provider = data['provider']
+      provider_uid = data['uid']
 
-      user = User.find_by(email:)
-      if user
-        user.update!(token:, nickname:)
-      else
-        user = User.create!(email:, token:, nickname:)
+      User.find_or_create_by(email:) do |user|
+        user.update!(token:, nickname:, provider:, provider_uid:)
       end
-      user
     end
   end
 end

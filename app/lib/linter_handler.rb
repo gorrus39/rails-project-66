@@ -11,16 +11,10 @@ class LinterHandler
       result_rubocop = rubocop_exec(dir_path)
       format_after_rubocop(result_rubocop)
     elsif @language.javascript?
-      # output_file_path = "#{dir_path}/eslint_result.json"
-      # FileUtils.touch output_file_path
-      # result_eslint = eslint_exec(dir_path, output_file_path)
-      # format_after_eslint(result_eslint)
-
       output_file_path = "#{dir_path}/eslint_result.json"
       FileUtils.touch output_file_path
-      system "cd #{dir_path} && yarn eslint --no-config-lookup --format json --output-file #{output_file_path}"
-      sleep 1
-      format_after_eslint(JSON.parse(File.read(output_file_path)))
+      result_eslint = eslint_exec(dir_path, output_file_path)
+      format_after_eslint(result_eslint)
     end
   end
 
