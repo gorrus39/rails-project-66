@@ -6,7 +6,7 @@ module Web
   class RepositoriesController < Web::ApplicationController
     before_action :autorize_user!
     before_action :set_github_client
-    caches_action :new, expires_in: 5.minutes
+    # caches_action :new, expires_in: 5.minutes
 
     def index
       @repositories = current_user.repositories.includes(:checks).order(created_at: :desc)

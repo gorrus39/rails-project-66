@@ -25,6 +25,7 @@ Style/Documentation:
     - app/models/**/*
     - app/lib/**/*
     - app/jobs/**/*
+    - app/policies/**/*
     - db/migrate/**/*
     - config/application.rb
     - config/initializers/**/*
