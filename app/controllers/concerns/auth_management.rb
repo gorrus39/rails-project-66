@@ -9,7 +9,7 @@ module AuthManagement
       @current_user ||= User.find_by(id: session['user_id'])
     end
 
-    def autorize_user!
+    def authenticate_user!
       return if current_user
 
       flash[:alert] = t('.alert')

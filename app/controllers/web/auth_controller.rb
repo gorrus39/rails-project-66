@@ -6,14 +6,20 @@ module Web
       data = request.env['omniauth.auth']
       user = get_user_by(data)
 
-      session['user_id'] = user.id
+      if user.save
+        session['user_id'] = user.id
+        flash[:notice] = t('.notice')
+      else
+        flash[:alert] = t('.alert')
+      end
 
       redirect_to root_path
     end
 
-    def log_out
+    def logout
       session.delete('user_id')
 
+      flash[:notice] = t('.notice')
       redirect_to root_path
     end
 
@@ -21,14 +27,15 @@ module Web
 
     def get_user_by(data)
       email = data['info']['email']
-      token = data['credentials']['token']
-      nickname = data['info']['nickname']
-      provider = data['provider']
-      provider_uid = data['uid']
 
-      User.find_or_create_by(email:) do |user|
-        user.update!(token:, nickname:, provider:, provider_uid:)
-      end
+      user = User.find_or_initialize_by(email:)
+
+      user.token = data['credentials']['token']
+      user.nickname = data['info']['nickname']
+      user.provider = data['provider']
+      user.provider_uid = data['uid']
+
+      user
     end
   end
 end

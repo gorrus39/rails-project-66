@@ -33,5 +33,5 @@ class Repository < ApplicationRecord
 
   enumerize :language, in: %i[ruby javascript]
 
-  validates :github_id, uniqueness: true
+  validates :github_id, uniqueness: true, presence: true
 end

@@ -85,6 +85,7 @@ gem 'enumerize', '~> 2.8'
 gem 'faker', '~> 3.3'
 gem 'faraday-retry', '~> 2.2' # почему-то происходит warning без этого гема, например при rails db:migrate
 gem 'i18n-debug', '~> 1.2'
+gem 'kaminari', '~> 1.2'
 gem 'minitest-power_assert', '~> 0.3.1'
 gem 'octokit', '~> 8.1'
 gem 'omniauth', '~> 2.1'

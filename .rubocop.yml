@@ -47,3 +47,7 @@ Style/ClassAndModuleChildren:
   Exclude:
     - app/models/repository/check.rb
     - test/models/repository_check_test.rb
+
+Metrics/AbcSize:
+  Exclude:
+    - app/controllers/web/repositories_controller.rb

@@ -2,11 +2,11 @@
 
 require Rails.root.join('app/lib/linter_handler.rb').to_s
 
-class FillCheckJob < ApplicationJob
+class CheckRepositoryJob < ApplicationJob
   queue_as :default
 
   def perform(user, check)
-    check.request!
+    check.run_check!
     linter_result_json = check_exec(user, check)
 
     if (linter_result_json[:offense_count]).positive?

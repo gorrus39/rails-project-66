@@ -27,5 +27,10 @@ module Web
 
       assert Repository.find_by(github_id: @git_rep_id)
     end
+    # test 'new' do
+    # end
+
+    # test 'index' do
+    # end
   end
 end

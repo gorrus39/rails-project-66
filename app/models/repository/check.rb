@@ -28,10 +28,9 @@ class Repository::Check < ApplicationRecord
 
   aasm do
     state :created, initial: true
-    state :requested
-    state :finished, :failed, :passed
+    state :requested, :finished, :failed
 
-    event :request do
+    event :run_check do
       transitions from: :created, to: :requested
     end
 
@@ -41,9 +40,6 @@ class Repository::Check < ApplicationRecord
 
     event :fail do
       transitions from: :requested, to: :failed
-    end
-    event :pass do
-      transitions from: :requested, to: :passed
     end
   end
 end

@@ -16,7 +16,7 @@
         li.nav-item
           = link_to current_user.email, '#', class: 'nav-link text-secondary'
         li.nav-item
-          = button_to t('.log_out'), auth_log_out_path,
+          = button_to t('.logout'), auth_logout_path,
             data: { turbo: false },
             class: 'nav-link text-dark'
       - else

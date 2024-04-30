@@ -11,8 +11,8 @@ class GithubClient
 
   def repos_collection(user)
     repos = repos_with_valid_lang(@client.repos, user)
-    repos.map { |rep| [rep[:full_name], rep[:id]] }
-    repos.each { |rep| Repository.create(github_id: rep[:id], full_name: rep[:full_name]) }
+    repos.map! { |rep| [rep[:full_name], rep[:id]] }
+    repos.each { |rep| Repository.create(github_id: rep[1], full_name: rep[0]) }
     repos
   end
 
@@ -20,7 +20,7 @@ class GithubClient
     @client.commits(rep_full_name).first.sha
   end
 
-  def mount_webhook(repository)
+  def create_hook(repository)
     @client.create_hook(
       repository.full_name,
       'web',
@@ -60,7 +60,9 @@ class GithubClient
       next false unless rep[:language]
 
       language = rep[:language].downcase.to_sym
-      user.repositories.new(language:).valid?
+      repo = user.repositories.new(language:)
+      repo.github_id = rep[:id]
+      repo.valid?
     end
   end
 end

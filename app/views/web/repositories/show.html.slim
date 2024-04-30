@@ -38,3 +38,4 @@
                     github_commit_link(check)
               td = t(".table.aasm_state.result.#{check.aasm_state}")
               td = l(check.created_at, format: :short)
+      = paginate @checks

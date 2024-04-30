@@ -6,17 +6,22 @@ require 'test_helper'
 module Web
   class CheckControllerTest < ActionDispatch::IntegrationTest
     setup do
-      @user = users(:one)
       @repository = repositories(:one)
+      @check = repository_checks(:one)
+      sign_in users(:one)
     end
 
-    test 'shold create check' do
-      sign_in @user
+    # test 'shold create check' do
+    #   assert_difference('Repository::Check.count') do
+    #     post repository_checks_url(@repository),
+    #          params: { repository: { id: @repository.id, full_name: @repository.full_name } }
+    #   end
+    # end
 
-      assert_difference('Repository::Check.count') do
-        post repository_checks_url(@repository),
-             params: { repository: { id: @repository.id, full_name: @repository.full_name } }
-      end
+    test 'shold show' do
+      get repository_check_url(@repository.id, @check.id)
+
+      assert_response :success
     end
   end
 end

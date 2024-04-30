@@ -4,59 +4,45 @@
 
 module Web
   class RepositoriesController < Web::ApplicationController
-    before_action :autorize_user!
+    before_action :authenticate_user!
     before_action :set_github_client
     # caches_action :new, expires_in: 5.minutes
 
     def index
-      @repositories = current_user.repositories.includes(:checks).order(created_at: :desc)
+      @repositories = current_user.repositories.includes(:checks).order(created_at: :desc).page params[:page]
     end
 
     def show
       @repository = Repository.find(params[:id])
-      @checks = @repository.checks.order(created_at: :desc)
+      @checks = @repository.checks.order(created_at: :desc).page params[:page]
     end
 
     def new
-      @repository = Repository.new
-      @repositories = @github_client.repos_collection(current_user)
+      @repository = current_user.repositories.build
+
+      cache_key = "#{current_user.cache_key_with_version}/github_repositories"
+
+      @repositories = Rails.cache.fetch(cache_key, expires_in: 12.hours) do
+        @github_client.repos_collection(current_user)
+      end
     end
 
     def create
-      github_repo_id = params['repository']['github_id']
-      if github_repo_id.present?
-        try_create_by(github_repo_id)
-        redirect_to repositories_path
+      repository = current_user.repositories.find_or_initialize_by(repository_params)
+
+      if repository.save
+        UpdateInfoRepositoryJob.perform_later(repository.id, current_user.id)
+        redirect_to repositories_path, notice: t('.notice')
       else
-        flash[:alert] = t('.alert')
-        redirect_to new_repository_path
+        flash[:error] = repository.errors.full_messages.join("\n")
+        redirect_to action: :new
       end
     end
 
     private
 
-    def try_create_by(github_repo_id)
-      repository = repository_instance(github_repo_id)
-      if repository.save
-        exec_actions_with(repository)
-        flash[:notice] = t('.notice')
-      else
-        flash[:alert] = t('.alert')
-      end
-    end
-
-    def exec_actions_with(repository)
-      check = repository.checks.create
-      FillCheckJob.perform_later(current_user, check)
-      MountWebhookJob.perform_later(repository, current_user) if ENV['BASE_URL'].present?
-    end
-
-    def repository_instance(github_repo_id)
-      repository = Repository.find_by(github_id: github_repo_id)
-      return repository if repository
-
-      rep_params = @github_client.repository_params(github_repo_id)
-      current_user.repositories.new(rep_params)
+    def repository_params
+      @github_client.repository_params(params['repository']['github_id'])
     end
 
     def set_github_client

@@ -6,7 +6,7 @@ ru:
       nav:
         main: Главная
         sign_in: Войти с помощью GitHub
-        log_out: Выйти
+        logout: Выйти
         repositories: Репозитории
   web:
     home:
@@ -78,6 +78,14 @@ ru:
           message: Сообщение
           rule: Идентификатор правила
           location: Строка и символ
+      create:
+       notice: Проверка началась
+    auth:
+      logout:
+        notice: Успешно разлогинен
+      callback:
+        notice: Успешно залогинен
+        alert: Что-то пошло не так...
   helpers:
     submit:
       repository:

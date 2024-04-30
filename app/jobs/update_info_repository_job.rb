@@ -2,12 +2,15 @@
 
 require Rails.root.join('app/lib/linter_handler.rb').to_s
 
-class MountWebhookJob < ApplicationJob
+class UpdateInfoRepositoryJob < ApplicationJob
   queue_as :default
 
-  def perform(repository, user)
+  def perform(repository_id, user_id)
+    repository = Repository.find(repository_id)
+    user = User.find(user_id)
+
     github_client = github_client_by(user)
-    github_client.mount_webhook(repository)
+    github_client.create_hook(repository)
   rescue StandardError
     'webhook already exist'
   end

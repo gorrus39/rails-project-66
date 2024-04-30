@@ -2,7 +2,7 @@
 
 Rails.application.routes.draw do
   namespace :api do
-    post 'checks', to: 'checks#from_webhook'
+    resources :checks, only: %i[create]
   end
   scope module: :web do
     root 'home#index'
@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     end
 
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth
-    post 'auth/log_out', to: 'auth#log_out', as: :auth_log_out
+    post 'auth/logout', to: 'auth#logout', as: :auth_logout
     post 'auth/:provider', to: 'auth#request', as: :auth_request
   end
 end
