@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     root 'home#index'
 
     resources :repositories, only: %i[index show new create update] do
-      resources :checks, only: %i[show create]
+      scope module: :repository do
+        resources :checks, only: %i[create show]
+      end
     end
 
     get 'auth/:provider/callback', to: 'auth#callback', as: :callback_auth

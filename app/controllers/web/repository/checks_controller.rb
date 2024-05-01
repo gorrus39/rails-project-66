@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Web
-  class ChecksController < Web::ApplicationController
+  class Repository::ChecksController < Web::ApplicationController
     def show
       @check = Repository::Check.includes(:repository).find(params[:id])
       authorize @check

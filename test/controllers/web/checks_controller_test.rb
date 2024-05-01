@@ -4,24 +4,26 @@ require 'test_helper'
 # require Rails.root.join('app/lib/github_client').to_s
 
 module Web
-  class CheckControllerTest < ActionDispatch::IntegrationTest
-    setup do
-      @repository = repositories(:one)
-      @check = repository_checks(:one)
-      sign_in users(:one)
-    end
+  module Repository
+    class CheckControllerTest < ActionDispatch::IntegrationTest
+      setup do
+        @repository = repositories(:one)
+        @check = repository_checks(:one)
+        sign_in users(:one)
+      end
 
-    # test 'shold create check' do
-    #   assert_difference('Repository::Check.count') do
-    #     post repository_checks_url(@repository),
-    #          params: { repository: { id: @repository.id, full_name: @repository.full_name } }
-    #   end
-    # end
+      # test 'shold create check' do
+      #   assert_difference('Repository::Check.count') do
+      #     post repository_checks_url(@repository),
+      #          params: { repository: { id: @repository.id, full_name: @repository.full_name } }
+      #   end
+      # end
 
-    test 'shold show' do
-      get repository_check_url(@repository.id, @check.id)
+      test 'shold show' do
+        get repository_check_url(@repository.id, @check.id)
 
-      assert_response :success
+        assert_response :success
+      end
     end
   end
 end
