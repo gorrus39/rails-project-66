@@ -1,11 +1,10 @@
 # local install for development mode
-install: install_gems make_env_file make_dev_cache_file prepare_db prepare_assets
+install: install_gems make_env_file make_dev_cache_file prepare_db prepare_assets tests
 
-for_render: install_gems prepare_db_for_render prepare_assets
+for_render: install_gems prepare_db_for_render prepare_assets tests
 
-
-
-
+tests:
+	bin/rails test
 
 ########################################
 

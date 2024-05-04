@@ -22,12 +22,12 @@ ru:
         name: Название
         language: Язык
         last_status: Статус последней проверки
-        repository:
-          checks:
-            created: Проверка ещё не завершена
-            requested: Проверка ещё не завершена
-            failed: 'false'
-            finished: 'true'
+        checks:
+          created: Проверка ещё не завершена
+          requested: Проверка ещё не завершена
+          failed: 'false'
+          finished: 'true'
+          none: Проверки не проводились
       show:
         check: Проверить
         name: Название
@@ -53,33 +53,34 @@ ru:
       create:
         alert: Необходимо выбрать репозиторий из списка
         notice: Проверка выполняется
-    checks:
-      show:
-        to_repository: Перейти к репозиторию
-        check_number: "Проверка #%{number}"
-        created_at: Дата создания
-        status: 
-          title: Статус
-          aasm_state:
-            created: Проверка ещё не завершена
-            requested: Проверка ещё не завершена
-            failed: Завершена
-            finished: Завершена
-        result: 
-          title: Проверка пройдена
-          aasm_state:
-            created: Проверка ещё не завершена
-            requested: ''
-            failed: 'false'
-            finished: 'true'
-        offense_count: Количество замечаний
-        commit_id: ID коммита
-        table:
-          message: Сообщение
-          rule: Идентификатор правила
-          location: Строка и символ
-      create:
-       notice: Проверка началась
+    repository:
+      checks:
+        show:
+          to_repository: Перейти к репозиторию
+          check_number: "Проверка #%{number}"
+          created_at: Дата создания
+          status: 
+            title: Статус
+            aasm_state:
+              created: Проверка ещё не завершена
+              requested: Проверка ещё не завершена
+              failed: Завершена
+              finished: Завершена
+          result: 
+            title: Проверка пройдена
+            aasm_state:
+              created: Проверка ещё не завершена
+              requested: ''
+              failed: 'false'
+              finished: 'true'
+          offense_count: Количество замечаний
+          commit_id: ID коммита
+          table:
+            message: Сообщение
+            rule: Идентификатор правила
+            location: Строка и символ
+        create:
+         notice: Проверка началась
     auth:
       logout:
         notice: Успешно разлогинен

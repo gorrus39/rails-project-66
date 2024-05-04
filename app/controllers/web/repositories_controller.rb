@@ -13,7 +13,7 @@ module Web
     end
 
     def show
-      @repository = Repository.find(params[:id])
+      @repository = ::Repository.find(params[:id])
       authorize @repository
       @checks = @repository.checks.order(created_at: :desc).page params[:page]
     end

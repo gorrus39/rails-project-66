@@ -25,7 +25,7 @@ module Web
       sign_in @user
       post repositories_url, params: { repository: { github_id: @git_rep_id } }
 
-      assert Repository.find_by(github_id: @git_rep_id)
+      assert ::Repository.find_by(github_id: @git_rep_id)
     end
     # test 'new' do
     # end

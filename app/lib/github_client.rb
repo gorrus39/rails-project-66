@@ -12,7 +12,7 @@ class GithubClient
   def repos_collection(user)
     repos = repos_with_valid_lang(@client.repos, user)
     repos.map! { |rep| [rep[:full_name], rep[:id]] }
-    repos.each { |rep| Repository.create(github_id: rep[1], full_name: rep[0]) }
+    repos.each { |rep| ::Repository.create(github_id: rep[1], full_name: rep[0]) }
     repos
   end
 

@@ -15,5 +15,5 @@
             tr
               td = link_to repository.name, repository
               td = repository.language
-              td = t(".repository.checks.#{aasm_state}")
+              td = aasm_state ? t(".checks.#{aasm_state}") : t('.checks.none')
       = paginate @repositories
