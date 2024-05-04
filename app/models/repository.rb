@@ -31,7 +31,7 @@ class Repository < ApplicationRecord
 
   has_many :checks, class_name: 'Repository::Check', dependent: :destroy
 
-  enumerize :language, in: %i[ruby javascript]
+  enumerize :language, in: %w[ruby javascript]
 
   validates :github_id, uniqueness: true, presence: true
 end

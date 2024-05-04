@@ -27,3 +27,8 @@ one:
 two:
   commit_id: MyString
   repository: two
+
+finished:
+  commit_id: MyString
+  repository: one
+  aasm_state: finished

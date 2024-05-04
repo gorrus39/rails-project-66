@@ -7,10 +7,11 @@ class LinterHandler
   end
 
   def exec(dir_path)
-    if @language.ruby?
+    case @language
+    when 'ruby'
       result_rubocop = rubocop_exec(dir_path)
       format_after_rubocop(result_rubocop)
-    elsif @language.javascript?
+    when 'javascript'
       output_file_path = "#{dir_path}/eslint_result.json"
       FileUtils.touch output_file_path
       result_eslint = eslint_exec(dir_path, output_file_path)

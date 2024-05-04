@@ -59,7 +59,7 @@ class GithubClient
     repos.filter do |rep|
       next false unless rep[:language]
 
-      language = rep[:language].downcase.to_sym
+      language = rep[:language].downcase
       repo = user.repositories.new(language:)
       repo.github_id = rep[:id]
       repo.valid?

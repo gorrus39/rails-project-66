@@ -8,7 +8,7 @@ module Web
     class CheckControllerTest < ActionDispatch::IntegrationTest
       setup do
         @repository = repositories(:one)
-        @check = repository_checks(:one)
+        @check = repository_checks(:finished)
         sign_in users(:one)
       end
 
