@@ -8,9 +8,9 @@ module Web
 
       if user.save
         session['user_id'] = user.id
-        flash[:notice] = t('.notice')
+        flash[:notice] = t('.login_success')
       else
-        flash[:alert] = t('.alert')
+        flash[:alert] = t('.login_fail')
       end
 
       redirect_to root_path
@@ -19,7 +19,7 @@ module Web
     def logout
       session.delete('user_id')
 
-      flash[:notice] = t('.notice')
+      flash[:notice] = t('.logout_success')
       redirect_to root_path
     end
 

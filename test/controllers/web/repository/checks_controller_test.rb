@@ -12,12 +12,12 @@ module Web
         sign_in users(:one)
       end
 
-      # test 'shold create check' do
-      #   assert_difference('Repository::Check.count') do
-      #     post repository_checks_url(@repository),
-      #          params: { repository: { id: @repository.id, full_name: @repository.full_name } }
-      #   end
-      # end
+      test 'shold create check' do
+        assert_difference('::Repository::Check.count') do
+          post repository_checks_url(@repository),
+               params: { repository: { id: @repository.id, full_name: @repository.full_name } }
+        end
+      end
 
       test 'shold show' do
         get repository_check_url(@repository.id, @check.id)

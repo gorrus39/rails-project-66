@@ -6,9 +6,13 @@ module Web
       def show
         @check = ::Repository::Check.includes(:repository).find(params[:id])
         authorize @check
-        return unless !@check.finished? && !@check.failed?
+        if !@check.finished? && !@check.failed?
+          flash[:notice] = t('.check_in_progress')
+          redirect_to @check.repository
+        else
 
-        flash[:notice] = t('.notice')
+          render :show
+        end
       end
 
       def create
@@ -18,7 +22,7 @@ module Web
 
         CheckRepositoryJob.perform_later(current_user, check)
 
-        flash[:notice] = t('.notice')
+        flash[:notice] = t('.create_success')
         redirect_to repository
       end
     end

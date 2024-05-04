@@ -6,7 +6,6 @@ module Web
   class RepositoriesController < Web::ApplicationController
     before_action :authenticate_user!
     before_action :set_github_client
-    # caches_action :new, expires_in: 5.minutes
 
     def index
       @repositories = current_user.repositories.includes(:checks).order(created_at: :desc).page params[:page]
@@ -35,9 +34,9 @@ module Web
 
       if repository.save
         UpdateInfoRepositoryJob.perform_later(repository.id, current_user.id)
-        redirect_to repositories_path, notice: t('.notice')
+        redirect_to repositories_path, notice: t('.create_success')
       else
-        flash[:error] = repository.errors.full_messages.join("\n")
+        flash[:alert] = repository.errors.full_messages.join("\n")
         redirect_to action: :new
       end
     end

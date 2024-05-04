@@ -34,6 +34,7 @@ ru:
         language: Язык
         created_at: Дата создания
         updated_at: Дата обновления
+        check_in_progress: Проверка выполняется
         table:
           status: Статус
           commit_id: ID коммита
@@ -52,13 +53,14 @@ ru:
               finished: 'true'
       create:
         alert: Необходимо выбрать репозиторий из списка
-        notice: Проверка выполняется
+        create_success: Успешно добавлен
     repository:
       checks:
         show:
           to_repository: Перейти к репозиторию
           check_number: "Проверка #%{number}"
           created_at: Дата создания
+          check_in_progress: Проверка ещё не завершена
           status: 
             title: Статус
             aasm_state:
@@ -80,13 +82,13 @@ ru:
             rule: Идентификатор правила
             location: Строка и символ
         create:
-         notice: Проверка началась
+         create_success: Проверка началась
     auth:
       logout:
-        notice: Успешно разлогинен
+        logout_success: Успешно разлогинен
       callback:
-        notice: Успешно залогинен
-        alert: Что-то пошло не так...
+        login_success: Успешно залогинен
+        login_fail: Что-то пошло не так...
   helpers:
     submit:
       repository:
