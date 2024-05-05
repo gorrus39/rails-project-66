@@ -1,4 +1,8 @@
 ru:
+  check_result_mailer:
+    failed_check: Проверка репозитория линтером провалена
+    error_check: Проверка репозитория линтером провалена
+    passed_check: Проверка репозитория линтером успешно завершена
   layouts:
     application:
       app_title: Github Quality

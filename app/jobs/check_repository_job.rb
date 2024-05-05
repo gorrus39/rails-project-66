@@ -15,14 +15,31 @@ class CheckRepositoryJob < ApplicationJob
   def lintering(user, check)
     linter_result_json = check_exec(user, check)
 
-    if (linter_result_json[:offense_count]).positive?
-      check.fail!
-      check.update(details: linter_result_json)
-      # CheckResultMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later
+    if linter_result_json[:is_fatal]
+      check_failed(check, user, linter_result_json)
+    elsif (linter_result_json[:offense_count]).positive?
+      check_error(check, user, linter_result_json)
     else
-      check.passed = true
-      check.finish!
+      check_passed(check, user)
     end
+  end
+
+  def check_failed(check, user, linter_result_json)
+    check.fail!
+    check.update(details: linter_result_json)
+    CheckResultMailer.with(user_id: user.id, repository_id: check.repository.id).failed_check_email.deliver_later
+  end
+
+  def check_error(check, user, linter_result_json)
+    check.finish!
+    check.update(details: linter_result_json)
+    CheckResultMailer.with(user_id: user.id, repository_id: check.repository.id).error_check_email.deliver_later
+  end
+
+  def check_passed(check, user)
+    check.passed = true
+    check.finish!
+    CheckResultMailer.with(user_id: user.id, repository_id: check.repository.id).passed_check_email.deliver_later
   end
 
   def check_exec(user, check)

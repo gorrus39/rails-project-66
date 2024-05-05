@@ -40,7 +40,7 @@ module Linter
               position: "#{message['line']}:#{message['column']}" }
           end
 
-          { file_path: make_file_path_from_eslint(file['filePath']), offenses: }
+          { file_path: make_file_path_from_eslint(file['filePath']), offenses:, is_fatal: false }
         end
       end
 

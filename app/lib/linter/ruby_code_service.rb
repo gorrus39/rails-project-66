@@ -11,12 +11,19 @@ module Linter
       private
 
       def format_after_rubocop(json)
-        files = json['files'].map do |file|
+        files = get_files(json)
+        files.filter! { |file| file[:offenses].count.positive? }
+        is_fatal = files.any? do |file|
+          file[:offenses].any? { |offense| offense[:severity] == 'fatal' }
+        end
+        { files:, offense_count: json['summary']['offense_count'], is_fatal: }
+      end
+
+      def get_files(json)
+        json['files'].map do |file|
           offenses = map_rubocop_offenses(file['offenses'])
           { file_path: make_file_path_from_rubocop(file['path']), offenses: }
         end
-        files.filter! { |file| file[:offenses].count.positive? }
-        { files:, offense_count: json['summary']['offense_count'] }
       end
 
       def make_file_path_from_rubocop(file_path)
@@ -28,7 +35,8 @@ module Linter
           {
             message: offense['message'],
             rule: offense['cop_name'],
-            position: "#{offense['location']['line']}:#{offense['location']['column']}"
+            position: "#{offense['location']['line']}:#{offense['location']['column']}",
+            severity: offense['severity']
           }
         end
       end
