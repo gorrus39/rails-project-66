@@ -18,10 +18,11 @@ class CheckRepositoryJob < ApplicationJob
     if (linter_result_json[:offense_count]).positive?
       check.fail!
       check.update(details: linter_result_json)
-      # CheckResultMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later
+      # CheckResultMailer.with(email: user.email).failed_check_email.deliver_later
     else
       check.passed = true
       check.finish!
+      # CheckResultMailer.with(email: user.email).passed_check_email.deliver_later
     end
   end
 

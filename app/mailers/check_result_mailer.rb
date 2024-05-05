@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
 class CheckResultMailer < ApplicationMailer
-  def notify_when_linter_failed
+  def failed_check_email
     mail(
-      to: 'gorrus100@gmail.com',
-      subject: params[:subject],
-      category: 'notify'
+      to: params[:email]
+      # subject: 'Result before linting your repository'
+    )
+  end
+
+  def passed_check_email
+    mail(
+      to: params[:email]
+      # subject: 'Result before linting your repository'
     )
   end
 end
