@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require Rails.root.join('app/lib/linter_handler.rb').to_s
-
 class UpdateInfoRepositoryJob < ApplicationJob
   queue_as :default
 

@@ -20,7 +20,7 @@ module Web
         check = repository.checks.create!
         authorize check
 
-        CheckRepositoryJob.perform_later(current_user, check)
+        CheckRepositoryJob.perform_later(current_user.id, check.id)
 
         flash[:notice] = t('.create_success')
         redirect_to repository

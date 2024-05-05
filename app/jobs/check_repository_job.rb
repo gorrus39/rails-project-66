@@ -1,25 +1,29 @@
 # frozen_string_literal: true
 
-require Rails.root.join('app/lib/linter_handler.rb').to_s
-
 class CheckRepositoryJob < ApplicationJob
   queue_as :default
 
-  def perform(user, check)
+  def perform(user_id, check_id)
+    user = User.find(user_id)
+    check = ::Repository::Check.find(check_id)
     check.run_check!
+    lintering user, check
+  end
+
+  private
+
+  def lintering(user, check)
     linter_result_json = check_exec(user, check)
 
     if (linter_result_json[:offense_count]).positive?
       check.fail!
       check.update(details: linter_result_json)
-      CheckResultMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later
+      # CheckResultMailer.with(subject: 'subject').notify_when_linter_failed.deliver_later
     else
       check.passed = true
       check.finish!
     end
   end
-
-  private
 
   def check_exec(user, check)
     repository = check.repository

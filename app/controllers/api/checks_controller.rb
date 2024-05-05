@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# require Rails.root.join('app/lib/github_client').to_s
-
 module Api
   class ChecksController < Api::ApplicationController
     skip_before_action :verify_authenticity_token
@@ -16,7 +14,7 @@ module Api
       end
 
       check = repository.checks.create!
-      CheckRepositoryJob.perform_later(repository.user, check) if check
+      CheckRepositoryJob.perform_later(repository.user.id, check.id) if check
       head :ok
     end
   end
